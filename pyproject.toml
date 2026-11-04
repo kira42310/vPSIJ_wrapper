@@ -13,5 +13,5 @@ requires = ["uv_build>=0.6.8"]
 build-backend = "uv_build"
 
 [tool.uv.build-backend]
-module-name = "vpsij_wrapper"
+module-name = "vPSIJ_wrapper"
 module-root = ""
