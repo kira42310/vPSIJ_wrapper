@@ -77,20 +77,10 @@ with open( '{ result_path }', 'wb' ) as res_file:
     del tmp[ 'self' ]
     self.job.spec = vPSIJ.job_spec( **tmp )
 
-  # def submit( self ):
-  #   self.executor.submit(
-  #     secure_channel = False,
-  #     callback_address: Literal[ 'hostname', 'ip', 'custom' ] = 'hostname',
-  #     custom_callback_address = Z,
-  #     custom_callback_port = ,
-  #     updater_ssh_user_address = Y,
-  #   )
-
   def submit_python( self,
     func_obj,
     args: list[ object ] = [],
     kwargs: Dict[ str, object ] = {},
-    python_bin: Optional[ str ] = 'python',
     secure_channel = False,
     callback_address: Literal[ 'hostname', 'ip', 'custom' ] = 'hostname',
     custom_callback_address: Optional[ str ] = None,
@@ -113,7 +103,10 @@ with open( '{ result_path }', 'wb' ) as res_file:
     Path( f'{ base_dir }/data' ).mkdir( parents = True, exist_ok = True )
     Path( f'{ base_dir }/result' ).mkdir( parents = True, exist_ok = True )
 
-    self.job.spec.executable = f'{ python_bin } { pyscript_path }'
+    # self.job.spec.executable = f'{ python_bin } { pyscript_path }'
+    if self.job.spec.executable is None:
+      self.job.spec.executable = 'python'
+    self.job.spec.arguments = pyscript_path
 
     self.python_serialize_function_and_args( data_path, func_obj, args = args, kwargs = kwargs )
 
