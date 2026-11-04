@@ -17,7 +17,7 @@ class vPSIJ_wrapper:
     self.job = vPSIJ.Job( sche, work_directory = work_directory )
     self.executor = vPSIJ.Executor( self.job )
     if spec != None:
-      self.job.spec = vPSIJ.job_spec( spec )
+      self.job.spec = vPSIJ.job_spec( **spec )
 
   def python_serialize_function_and_args( self, filename: Path, func_obj, args: list = [], kwargs: Dict = {} ) -> None:
     with open( filename, 'wb' ) as obj_file:
@@ -44,7 +44,7 @@ except Exception as e:
   exception = e
 
 with open( '{ result_path }', 'wb' ) as res_file:
-  pickle.dump( ( results, exception ), res_File )
+  pickle.dump( ( results, exception ), res_file )
 """
 
   def config_spec(
