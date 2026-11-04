@@ -13,7 +13,6 @@ class vPSIJ_wrapper:
       spec: Optional[ dict[ str, object ] ] = None
       #keep_files: Optional[ bool ] = False 
     ):
-    print( sche )
     self.job = vPSIJ.Job( sche, work_directory = work_directory )
     self.executor = vPSIJ.Executor( self.job )
     if spec != None:
